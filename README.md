@@ -71,3 +71,102 @@ CREATE TABLE revenue_snapshots (
 CREATE INDEX idx_agent_runs_name_time ON agent_runs(agent_name, started_at);
 CREATE INDEX idx_price_history_product ON price_history(product_id);
 CREATE INDEX idx_messages_status ON customer_messages(status);
+name: Recommend a Resource
+description: Recommend a Claude Code resource for the list
+title: "[Resource]: <name of your resource>"
+labels: ["resource-submission", "validation-pending"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for recommending a resource! An automated check will validate the form
+        and post results as a comment. Passing validation means your recommendation has
+        been received — a maintainer reviews and approves at their discretion.
+
+        Please make sure the resource is specific to Claude Code, of high quality, and
+        not already on the list.
+
+  - type: input
+    id: display_name
+    attributes:
+      label: Display Name
+      description: The name of the resource as it will appear in the list.
+      placeholder: "e.g., Dev Browser"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: The primary category for your resource.
+      options:
+        - "Start Here"
+        - "Documentation, Knowledge & Learning"
+        - "Research & Scientific Inquiry"
+        - "Providers, Runtime & Integration Infrastructure"
+        - "Remote Control, Notifications & Voice I/O"
+        - "Alternative Clients"
+        - "Status Lines"
+        - "Design & UI/UX"
+        - "Writing & Prose Quality"
+        - "Creative Media"
+        - "Infrastructure & DevOps"
+        - "Security"
+        - "Multi-Agent Orchestration"
+        - "Skills"
+        - "Memory & Context Persistence"
+        - "Usage & Cost Monitoring"
+        - "Observability"
+        - "Linting"
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: The main URL (must start with https://). Prefer the GitHub repo.
+      placeholder: "https://github.com/username/repository"
+    validations:
+      required: true
+
+  - type: input
+    id: author_name
+    attributes:
+      label: Author Name
+      description: The author's name, alias, or GitHub username.
+      placeholder: "Jane Doe or janedoe"
+    validations:
+      required: true
+
+  - type: input
+    id: author_link
+    attributes:
+      label: Author Link
+      description: Link to the author's GitHub profile or website (https://).
+      placeholder: "https://github.com/janedoe"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: "1–3 sentences. Descriptive, not promotional. Don't address the reader. (10–500 characters.)"
+      placeholder: "Describe what the resource does and what makes it notable."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "I checked that this resource isn't already on the list"
+          required: true
+        - label: "All links are working and publicly accessible"
+          required: true
+        - label: "This resource is specific to Claude Code"
+          required: true
